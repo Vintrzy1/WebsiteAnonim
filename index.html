@@ -4,24 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ayo Curhat - Versi Sederhana</title>
-    <!-- 1. Memuat Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* CSS untuk latar belakang biru statis */
         body {
-            background-color: #004466; /* Warna biru dari animasi astronot */
-            color: #E5E7EB; /* Teks abu-abu muda */
+            background-color: #004466;
+            color: #E5E7EB;
         }
-        /* Mengganti warna form agar kontras */
         .form-input, .form-textarea {
-            background-color: #1F2937; /* Latar belakang input gelap */
-            border-color: #4B5563; /* Border abu-abu */
-            color: #F9FAFB; /* Teks putih */
+            background-color: #1F2937;
+            border-color: #4B5563;
+            color: #F9FAFB;
         }
         .form-input::placeholder, .form-textarea::placeholder {
-            color: #9CA3AF; /* Placeholder abu-abu */
+            color: #9CA3AF;
         }
-        /* Style untuk ikon kontak */
         .contact-icon {
             display: inline-block;
             transition: transform 0.2s ease-in-out;
@@ -29,7 +25,6 @@
         .contact-icon:hover {
             transform: scale(1.1);
         }
-        /* Pastikan SVG mengisi ruang */
         .contact-icon svg {
              width: 24px;
              height: 24px;
@@ -38,7 +33,6 @@
 </head>
 <body class="flex flex-col min-h-screen">
 
-    <!-- Header -->
     <header class="bg-gray-900/80 backdrop-blur-sm shadow-lg sticky top-0 z-10 border-b border-gray-700">
         <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-3xl font-bold text-pink-500 tracking-wider">Ayo Curhat</h1>
@@ -46,10 +40,8 @@
         </div>
     </header>
 
-    <!-- Konten Utama -->
     <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
 
-        <!-- Formulir Pengiriman -->
         <section id="form-curhat" class="bg-gray-800/80 backdrop-blur-md p-8 rounded-2xl shadow-2xl border-t-4 border-pink-500/50 mb-8">
             <h2 class="text-2xl font-semibold mb-4 text-white">Luangkan Isi Hatimu</h2>
             <form id="post-form">
@@ -58,13 +50,11 @@
                            class="w-full p-3 border rounded-lg focus:ring-purple-500 focus:border-purple-500 transition duration-150 form-input"/>
                 </div>
 
-                <!-- Input WA & IG (Sederhana) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <input type="text" id="wa_number" placeholder="Nomor WhatsApp (Opsional)" class="w-full p-3 border rounded-lg form-input"/>
                     <input type="text" id="ig_handle" placeholder="Username Instagram (tanpa @)" class="w-full p-3 border rounded-lg form-input"/>
                 </div>
 
-                <!-- Input URL Gambar (Bukan Upload) -->
                 <div class="mb-4">
                     <input type="text" id="image_url" placeholder="URL Gambar (Opsional, tempel link .jpg/.png)"
                            class="w-full p-3 border rounded-lg form-input"/>
@@ -76,7 +66,6 @@
                               class="w-full p-3 border rounded-lg resize-none transition duration-150 form-textarea"></textarea>
                 </div>
 
-                <!-- Tombol dinonaktifkan secara default sampai auth siap -->
                 <button type="submit" id="submit-button"
                         class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-full transition duration-300 ease-in-out shadow-lg shadow-purple-500/30 hover:shadow-xl disabled:opacity-50"
                         disabled>
@@ -87,25 +76,20 @@
             <div id="success-message" class="text-green-400 mt-3"></div>
         </section>
 
-        <!-- Dinding Ekspresi -->
         <section>
             <h2 class="text-2xl font-semibold mb-4 text-white">Dinding Ekspresi</h2>
             <div id="posts-container" class="space-y-4">
-                <!-- Curhatan akan dimuat di sini oleh JavaScript -->
                 <p id="loading-indicator" class="text-center text-gray-400 p-8 bg-gray-800/80 rounded-xl">Memuat curhatan...</p>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
     <footer class="text-center py-6 mt-10 text-gray-400 border-t border-gray-700/50 bg-gray-900/80 backdrop-blur-sm">
         <p class="text-xs md:text-sm">&copy; 2025 Ayo Curhat. User ID: <span id="display-user-id" class="font-mono text-xs break-all">N/A</span></p>
     </footer>
 
-    <!-- 2. Memuat Firebase (Wajib) -->
     <script type="module">
-        // Import fungsi yang kita butuhkan
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -119,19 +103,16 @@
             orderBy
         } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        // --- KONFIGURASI FIREBASE ANDA ---
         const firebaseConfig = {
           apiKey: "AIzaSyAsuTfzsSAE4cpY1bJ-NxG4dVUWOyHz0aA",
           authDomain: "ayocurhatcuy.firebaseapp.com",
           projectId: "ayocurhatcuy",
-          storageBucket: "ayocurhatcuy.appspot.com", // <-- Perbaiki ini jika perlu
+          storageBucket: "ayocurhatcuy.appspot.com",
           messagingSenderId: "405958107143",
           appId: "1:405958107143:web:5ef95f4c17edbccb3e4aa2",
           measurementId: "G-5NNZN3N2V6"
         };
-        // --- AKHIR KONFIGURASI ---
 
-        // Elemen UI
         const authStatusEl = document.getElementById('auth-status');
         const userIdEl = document.getElementById('display-user-id');
         const postForm = document.getElementById('post-form');
@@ -140,16 +121,12 @@
         const successMessageEl = document.getElementById('success-message');
         const postsContainer = document.getElementById('posts-container');
 
-
         let db;
         let auth;
-        let currentUserId; // Ini akan diisi oleh onAuthStateChanged
+        let currentUserId;
 
-        // --- 3. Logika Aplikasi ---
         try {
-            // Inisialisasi Firebase
             const app = initializeApp(firebaseConfig);
-            // Inisialisasi Analytics hanya jika measurementId ada
             if (firebaseConfig.measurementId) {
                 try {
                      getAnalytics(app);
@@ -160,7 +137,6 @@
             db = getFirestore(app);
             auth = getAuth(app);
 
-            // Autentikasi Anonim
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
                     currentUserId = user.uid;
@@ -172,17 +148,16 @@
                 } else {
                     try {
                         await signInAnonymously(auth);
-                        // User akan otomatis terdeteksi lagi oleh onAuthStateChanged di atas
                     } catch (error) {
                         console.error("Gagal auth anonim:", error);
-                        authStatusEl.textContent = "Gagal terhubung. (Aktifkan Anonim di Firebase)";
-                        errorMessageEl.textContent = "Gagal terhubung ke server. Pastikan Sign-in Anonim diaktifkan di Firebase Console.";
+                        authStatusEl.textContent = "Gagal terhubung. (Aktifkan Anonim di Firebase?)";
+                        errorMessageEl.textContent = "Gagal terhubung ke server. Pastikan Sign-in Anonim diaktifkan di Firebase Console dan Rules Firestore diatur.";
                         submitButton.textContent = 'Gagal Terhubung';
                         const loadingEl = document.getElementById('loading-indicator');
                         if (loadingEl) loadingEl.textContent = "Gagal memuat.";
                     }
                 }
-            }, (error) => { // Error callback for onAuthStateChanged
+            }, (error) => {
                  console.error("Auth State Error:", error);
                  authStatusEl.textContent = "Error Autentikasi";
                  errorMessageEl.textContent = "Terjadi kesalahan saat memeriksa status login.";
@@ -191,14 +166,13 @@
                  if (loadingEl) loadingEl.textContent = "Gagal memuat.";
             });
 
-            // Kirim Curhatan
             postForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 errorMessageEl.textContent = '';
                 successMessageEl.textContent = '';
 
                 if (!currentUserId) {
-                    errorMessageEl.textContent = 'Koneksi belum siap. Harap tunggu dan coba lagi.';
+                    errorMessageEl.textContent = 'Koneksi belum siap atau gagal. Coba refresh.';
                     return;
                 }
 
@@ -208,7 +182,7 @@
                 const nama = document.getElementById('nama').value.trim() || 'Anonim';
                 const content = document.getElementById('curhatan').value.trim();
                 const waNumber = document.getElementById('wa_number').value.trim();
-                const igHandle = document.getElementById('ig_handle').value.trim().replace(//, ''); // Hapus @
+                const igHandle = document.getElementById('ig_handle').value.trim().replace(/^@/, '');
                 const imageUrl = document.getElementById('image_url').value.trim();
 
                 if (!content && !imageUrl) {
@@ -236,25 +210,33 @@
 
                 } catch (error) {
                     console.error("Error mengirim curhatan: ", error);
-                    errorMessageEl.textContent = `Gagal mengirim curhatan. (${error.message})`;
+                    errorMessageEl.textContent = `Gagal mengirim curhatan. (${error.message}) Periksa Rules Firestore.`;
                 } finally {
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Kirim dan Luangkan';
+                    if(currentUserId) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Kirim dan Luangkan';
+                    }
                 }
             });
 
-            // Memuat Curhatan (Real-time)
             function loadPosts() {
+                 if (!db) return;
                 const postsRef = collection(db, 'curhatan');
                 const q = query(postsRef, orderBy('timestamp', 'desc'));
 
-                onSnapshot(q, (snapshot) => {
+                if (window.firestoreListenerUnsubscribe) {
+                    window.firestoreListenerUnsubscribe();
+                    console.log("Firestore listener lama dihentikan.");
+                }
+
+                console.log("Memasang listener Firestore baru...");
+                window.firestoreListenerUnsubscribe = onSnapshot(q, (snapshot) => {
                     const loadingEl = document.getElementById('loading-indicator');
                     if (loadingEl) {
                         loadingEl.remove();
                     }
 
-                    postsContainer.innerHTML = ''; // Bersihkan kontainer
+                    postsContainer.innerHTML = '';
 
                     if (snapshot.empty) {
                         postsContainer.innerHTML = '<p class="text-center text-gray-400 p-8 bg-gray-800/80 rounded-xl">Belum ada curhatan. Jadilah yang pertama!</p>';
@@ -264,25 +246,22 @@
                     snapshot.docs.forEach(doc => {
                         const post = doc.data();
                         const postId = doc.id;
-                        // Pastikan post memiliki data sebelum membuat elemen
                         if (post && post.timestamp) {
                              const postEl = createPostElement(post, postId);
                              postsContainer.appendChild(postEl);
                         } else {
-                             console.warn("Skipping invalid post data:", postId, post);
+                             console.warn("Skipping invalid post data (missing timestamp?):", postId, post);
                         }
                     });
 
                 }, (error) => {
-                    console.error("Error memuat curhatan: ", error);
-                    // Hapus loading indicator jika error
+                    console.error("Error memuat curhatan (onSnapshot): ", error);
                     const loadingEl = document.getElementById('loading-indicator');
                     if (loadingEl) loadingEl.remove();
-                    postsContainer.innerHTML = `<p class="text-center text-red-400 p-8 bg-gray-800/80 rounded-xl">Gagal memuat curhatan. (${error.message}) Periksa Rules Firestore Anda.</p>`;
+                    postsContainer.innerHTML = `<p class="text-center text-red-400 p-8 bg-gray-800/80 rounded-xl">Gagal memuat curhatan. Error: ${error.message}. Periksa Rules Firestore Anda.</p>`;
                 });
             }
 
-            // Fungsi untuk membuat elemen HTML curhatan
             function createPostElement(post, postId) {
                 const el = document.createElement('div');
                 el.className = 'bg-gray-800/80 backdrop-blur-md p-6 rounded-xl shadow-xl border border-pink-500/30';
@@ -301,11 +280,10 @@
                 const isAuthor = currentUserId && (post.authorId === currentUserId);
                 const authorTag = isAuthor ? `<span class="ml-2 text-sm font-normal text-purple-400">(Anda)</span>` : '';
 
-                // --- PERBAIKAN DI SINI: Masukkan SVG Lengkap ---
                 let contactIconsHTML = '';
                 if (post.waNumber || post.igHandle) {
                     contactIconsHTML += '<div class="mt-3 pt-3 border-t border-gray-700 flex items-center space-x-3">';
-                    const formatWaLink = (number) => { /* ... formatWaLink ... */
+                    const formatWaLink = (number) => {
                          if (!number) return null;
                          const cleanNumber = number.replace(/[^0-9+]/g, '');
                          if (!cleanNumber.startsWith('62') && !cleanNumber.startsWith('+62')) {
@@ -313,7 +291,7 @@
                          }
                          return `https://wa.me/${cleanNumber.replace('+', '')}`;
                     };
-                    const formatIgLink = (handle) => { /* ... formatIgLink ... */
+                    const formatIgLink = (handle) => {
                          if (!handle) return null;
                          const cleanHandle = handle.replace(/^@/, '');
                          return `https://www.instagram.com/${cleanHandle}`;
@@ -322,7 +300,6 @@
                     const waLink = formatWaLink(post.waNumber);
                     const igLink = formatIgLink(post.igHandle);
 
-                    // Ikon WhatsApp (SVG Lengkap)
                     if (waLink) {
                         contactIconsHTML += `
                             <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="contact-icon text-green-400 hover:text-green-300" title="Chat di WhatsApp">
@@ -331,7 +308,6 @@
                                 </svg>
                             </a>`;
                     }
-                    // Ikon Instagram (SVG Lengkap)
                     if (igLink) {
                          contactIconsHTML += `
                             <a href="${igLink}" target="_blank" rel="noopener noreferrer" class="contact-icon text-pink-400 hover:text-pink-300" title="Lihat di Instagram @${post.igHandle}">
@@ -340,27 +316,23 @@
                                 </svg>
                             </a>`;
                     }
-                    contactIconsHTML += '</div>'; // Tutup div flex
+                    contactIconsHTML += '</div>';
                 }
-                // --- AKHIR PERBAIKAN ---
 
 
                 let imageEl = '';
                 if(post.imageUrl) {
-                    // Cek sederhana jika URL valid (minimal mengandung http atau www)
-                    const sanitizedUrl = post.imageUrl.startsWith('http') ? post.imageUrl : `https://${post.imageUrl}`; // Asumsi https jika tidak ada
-                    // Error handling sederhana jika gambar gagal dimuat
-                    imageEl = `<div class="my-4"><img src="${sanitizedUrl}" class="max-w-full h-auto rounded-xl object-contain border border-gray-700/50 shadow-lg max-h-[70vh]" alt="Gambar curhatan" onerror="this.alt='Gambar gagal dimuat'; this.style.display='none';"></div>`; // Tambah max-h & error handling
+                    const sanitizedUrl = post.imageUrl.startsWith('http') ? post.imageUrl : `https://${post.imageUrl}`;
+                    imageEl = `<div class="my-4"><img src="${sanitizedUrl}" class="max-w-full h-auto rounded-xl object-contain border border-gray-700/50 shadow-lg max-h-[70vh]" alt="Gambar curhatan" onerror="this.alt='Gambar gagal dimuat'; this.style.display='none';"></div>`;
                 }
 
                 el.innerHTML = `
                     <h3 class="text-xl font-bold text-pink-400 mb-2 break-words">${post.name} ${authorTag}</h3>
                     ${imageEl}
                     <p class="text-gray-300 mb-3 whitespace-pre-wrap break-words">${post.content}</p>
-                    ${contactIconsHTML} {/* Masukkan HTML ikon di sini */}
+                    ${contactIconsHTML}
                     <div class="flex justify-between items-center text-sm mt-4 border-t border-gray-700 pt-3">
                         <div class="flex space-x-4 text-gray-400">
-                            <!-- Fitur Like/Komen tidak ada di versi ini -->
                         </div>
                         <span class="text-xs text-gray-500">${timeAgo(post.timestamp)}</span>
                     </div>
